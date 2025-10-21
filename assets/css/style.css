@@ -8,8 +8,8 @@
   --panel-border: rgba(34, 47, 62, 0.12);
   --accent-color: #0d6efd;
   --accent-muted: rgba(13, 110, 253, 0.12);
-  --text-color: #000000;
-  --subtle-text: #000000;
+  --text-color: #1b2538;
+  --subtle-text: #445268;
   font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
 }
@@ -222,8 +222,8 @@ body::before {
     --bg-color: #101723;
     --panel-bg: rgba(20, 28, 38, 0.95);
     --panel-border: rgba(255, 255, 255, 0.08);
-    --text-color: #000000;
-    --subtle-text: #000000;
+    --text-color: #f1f5f9;
+    --subtle-text: #c5cfde;
   }
 
   body {
