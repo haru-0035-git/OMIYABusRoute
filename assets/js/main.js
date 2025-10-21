@@ -248,10 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     placeholderOption.value = '';
     placeholderOption.textContent = 'のりばを選択してください';
     placeholderOption.disabled = true;
-    placeholderOption.selected = true;
     stopSelect.appendChild(placeholderOption);
-
-    let hasVisibleStops = false;
 
     const appendGroup = (exit, label) => {
       const group = document.createElement('optgroup');
@@ -268,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (group.children.length > 0) {
         stopSelect.appendChild(group);
-        hasVisibleStops = true;
       }
     };
 
@@ -295,8 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       placeholderOption.selected = true;
     }
-
-    stopSelect.disabled = !hasVisibleStops;
   }
 
   function renderMarkers() {

@@ -118,30 +118,20 @@ body::before {
 
 .stop-selector select {
   width: 100%;
-  padding: 0.7rem 2.75rem 0.7rem 0.85rem;
+  padding: 0.7rem 0.85rem;
   border-radius: 0.75rem;
   border: 1px solid var(--panel-border);
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23192938' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1rem auto;
+  background: rgba(255, 255, 255, 0.95);
   color: inherit;
   font: inherit;
   cursor: pointer;
-  transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
-  appearance: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
 .stop-selector select:focus {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.18);
-}
-
-.stop-selector select:disabled {
-  cursor: progress;
-  color: var(--subtle-text);
 }
 
 .stop-selector option {
