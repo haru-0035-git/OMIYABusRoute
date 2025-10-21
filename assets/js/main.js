@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeStopId = null;
 
+  if (stopSelect) {
+    stopSelect.disabled = true;
+  }
+
   function createMarker(stop) {
     const marker = L.marker([stop.lat, stop.lng], {
       title: stop.name,
