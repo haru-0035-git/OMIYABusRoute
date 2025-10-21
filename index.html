@@ -32,10 +32,12 @@
             <input type="checkbox" id="filter-west" checked /> 西口
           </label>
         </div>
-        <div class="stop-list">
+        <div class="stop-selector">
           <h2>のりば一覧</h2>
-          <div class="stop-group" id="east-stops" aria-label="東口ののりば一覧"></div>
-          <div class="stop-group" id="west-stops" aria-label="西口ののりば一覧"></div>
+          <label for="stop-select">バス停を選択</label>
+          <select id="stop-select" aria-label="バス停を選択">
+            <option value="">読み込み中...</option>
+          </select>
         </div>
         <article class="stop-details" id="stop-details" aria-label="のりば詳細">
           <h2>のりば詳細</h2>

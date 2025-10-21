@@ -86,53 +86,39 @@ body {
   margin-right: 0.35rem;
 }
 
-.stop-list h2,
+.stop-selector h2,
 .stop-details h2 {
   margin: 0 0 0.75rem;
   font-size: 1.1rem;
 }
 
-.stop-group {
-  display: grid;
+.stop-selector {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
-.stop-group:last-child {
-  margin-bottom: 0;
+.stop-selector label {
+  font-size: 0.9rem;
+  color: var(--subtle-text);
 }
 
-.stop-card {
-  border: 1px solid var(--panel-border);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
-  display: block;
+.stop-selector select {
   width: 100%;
-  text-align: left;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.95);
   color: inherit;
   font: inherit;
-  appearance: none;
+  cursor: pointer;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
-.stop-card:hover,
-.stop-card:focus {
-  transform: translateY(-2px);
-  border-color: var(--accent-color);
-  box-shadow: 0 12px 24px rgba(13, 110, 253, 0.08);
+.stop-selector select:focus {
   outline: none;
-}
-
-.stop-card.active {
   border-color: var(--accent-color);
-  background: var(--accent-muted);
-}
-
-.stop-card small {
-  display: block;
-  color: var(--subtle-text);
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.18);
 }
 
 .stop-details {
