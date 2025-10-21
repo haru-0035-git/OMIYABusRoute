@@ -160,7 +160,7 @@ body::before {
   border-radius: 999px;
   font-size: 0.8rem;
   background: var(--accent-muted);
-  color: var(--accent-color);
+  color: #000000;
   margin-bottom: 0.5rem;
 }
 
