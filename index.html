@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大宮駅バスのりば案内</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-sA+e2atJzG32buxNpmtwKc8A+OrYJSFkPeI4F2GcN0w="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>大宮駅バスのりば案内</h1>
+      <p>
+        大宮駅周辺のバスのりばを地図で確認し、行き先と次に出発するバスをチェックできます。
+      </p>
+    </header>
+    <main class="app-layout">
+      <section class="map-container">
+        <div id="map" aria-label="大宮駅周辺のマップ"></div>
+      </section>
+      <section class="info-panel" aria-live="polite">
+        <div class="filter-controls">
+          <label>
+            <input type="checkbox" id="filter-east" checked /> 東口
+          </label>
+          <label>
+            <input type="checkbox" id="filter-west" checked /> 西口
+          </label>
+        </div>
+        <div class="stop-list">
+          <h2>のりば一覧</h2>
+          <div class="stop-group" id="east-stops" aria-label="東口ののりば一覧"></div>
+          <div class="stop-group" id="west-stops" aria-label="西口ののりば一覧"></div>
+        </div>
+        <article class="stop-details" id="stop-details" aria-label="のりば詳細">
+          <h2>のりば詳細</h2>
+          <p>マップまたは一覧からのりばを選択してください。</p>
+        </article>
+      </section>
+    </main>
+    <footer class="app-footer">
+      <small>
+        本アプリはデモ用に作成された仮想データを使用しています。時間は現在時刻に基づく擬似的な表示です。
+      </small>
+    </footer>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-o9N1j7kVtCwQiaL4cVIe1PsvsP0i0Zp6bW+4ypk0U6A="
+      crossorigin=""
+    ></script>
+    <script src="assets/js/busStops.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
