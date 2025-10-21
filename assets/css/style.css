@@ -57,12 +57,12 @@ body {
   overflow: hidden;
   box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
   min-height: clamp(360px, 65vh, 720px);
+  height: clamp(360px, 65vh, 720px);
 }
 
 #map {
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
+  position: absolute;
+  inset: 0;
 }
 
 .info-panel {
@@ -209,6 +209,7 @@ body {
 
   .map-container {
     min-height: clamp(280px, 55vh, 480px);
+    height: clamp(280px, 55vh, 480px);
   }
 }
 
