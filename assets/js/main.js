@@ -291,6 +291,20 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       placeholderOption.selected = true;
     }
+
+    const selectableOptions = stopSelect.querySelectorAll('option[value]:not([value=""])');
+    const hasSelectableOptions = selectableOptions.length > 0;
+
+    stopSelect.disabled = !hasSelectableOptions;
+
+    if (!hasSelectableOptions) {
+      stopSelect.value = '';
+      placeholderOption.disabled = false;
+      placeholderOption.textContent = '表示できるのりばがありません';
+    } else {
+      placeholderOption.disabled = true;
+      placeholderOption.textContent = 'のりばを選択してください';
+    }
   }
 
   function renderMarkers() {
