@@ -22,12 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const markerLayer = L.layerGroup().addTo(map);
   const stopMarkers = new Map();
-  const stopCards = new Map();
-
+  
   const filterEast = document.getElementById('filter-east');
   const filterWest = document.getElementById('filter-west');
-  const eastContainer = document.getElementById('east-stops');
-  const westContainer = document.getElementById('west-stops');
+  const stopSelect = document.getElementById('stop-select');
   const detailsElement = document.getElementById('stop-details');
   const mapContainer = document.querySelector('.map-container');
 
@@ -47,31 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     return marker;
-  }
-
-  function createStopCard(stop) {
-    const button = document.createElement('button');
-    button.className = 'stop-card';
-    button.type = 'button';
-    button.dataset.stopId = stop.id;
-    button.innerHTML = `
-      <strong>${stop.name}</strong>
-      <small>${stop.exit === 'east' ? '東口' : '西口'} / ${stop.platform}番</small>
-      <small>${stop.landmarks.join('・')}</small>
-    `;
-
-    button.addEventListener('click', () => {
-      selectStop(stop.id, { centerOnMap: true });
-    });
-
-    button.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        selectStop(stop.id, { centerOnMap: true });
-      }
-    });
-
-    return button;
   }
 
   function toMinutes(timeString) {
@@ -184,11 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function clearSelection() {
     activeStopId = null;
-    stopCards.forEach((card) => card.classList.remove('active'));
     detailsElement.innerHTML = `
       <h2>のりば詳細</h2>
       <p>マップまたは一覧からのりばを選択してください。</p>
     `;
+    if (stopSelect) {
+      if (stopSelect.options.length > 0) {
+        stopSelect.selectedIndex = 0;
+      } else {
+        stopSelect.value = '';
+      }
+    }
   }
 
   function selectStop(stopId, options = { centerOnMap: true }) {
@@ -205,11 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     activeStopId = stopId;
 
-    stopCards.forEach((card) => card.classList.remove('active'));
-    const card = stopCards.get(stopId);
-    if (card) {
-      card.classList.add('active');
-      card.scrollIntoView({ block: 'nearest' });
+    if (stopSelect && stopSelect.value !== stopId) {
+      stopSelect.value = stopId;
     }
 
     const marker = stopMarkers.get(stopId);
@@ -229,12 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     busStops.forEach((stop) => {
       const shouldShow = stop.exit === 'east' ? showEast : showWest;
-      const card = stopCards.get(stop.id);
       const marker = stopMarkers.get(stop.id);
-
-      if (card) {
-        card.style.display = shouldShow ? 'block' : 'none';
-      }
 
       if (marker) {
         const hasLayer = markerLayer.hasLayer(marker);
@@ -256,21 +227,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+
+    renderStopOptions();
   }
 
-  function renderStopList() {
-    eastContainer.innerHTML = '<h3>東口</h3>';
-    westContainer.innerHTML = '<h3>西口</h3>';
+  function renderStopOptions() {
+    if (!stopSelect) return;
 
-    busStops.forEach((stop) => {
-      const card = createStopCard(stop);
-      stopCards.set(stop.id, card);
-      if (stop.exit === 'east') {
-        eastContainer.appendChild(card);
-      } else {
-        westContainer.appendChild(card);
+    const showEast = filterEast.checked;
+    const showWest = filterWest.checked;
+    const previousValue = stopSelect.value;
+
+    stopSelect.innerHTML = '';
+
+    const placeholderOption = document.createElement('option');
+    placeholderOption.value = '';
+    placeholderOption.textContent = 'のりばを選択してください';
+    placeholderOption.disabled = true;
+    stopSelect.appendChild(placeholderOption);
+
+    const appendGroup = (exit, label) => {
+      const group = document.createElement('optgroup');
+      group.label = label;
+
+      busStops
+        .filter((stop) => stop.exit === exit)
+        .forEach((stop) => {
+          const option = document.createElement('option');
+          option.value = stop.id;
+          option.textContent = stop.name;
+          group.appendChild(option);
+        });
+
+      if (group.children.length > 0) {
+        stopSelect.appendChild(group);
       }
-    });
+    };
+
+    if (showEast) {
+      appendGroup('east', '東口');
+    }
+    if (showWest) {
+      appendGroup('west', '西口');
+    }
+
+    const activeOption = activeStopId
+      ? stopSelect.querySelector(`option[value="${activeStopId}"]`)
+      : null;
+
+    if (activeOption) {
+      activeOption.selected = true;
+    } else if (previousValue) {
+      const previousOption = stopSelect.querySelector(`option[value="${previousValue}"]`);
+      if (previousOption) {
+        previousOption.selected = true;
+      } else {
+        placeholderOption.selected = true;
+      }
+    } else {
+      placeholderOption.selected = true;
+    }
   }
 
   function renderMarkers() {
@@ -281,10 +297,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (stopSelect) {
+    stopSelect.addEventListener('change', (event) => {
+      const { value } = event.target;
+      if (value) {
+        selectStop(value, { centerOnMap: true });
+      }
+    });
+  }
+
   filterEast.addEventListener('change', updateFilters);
   filterWest.addEventListener('change', updateFilters);
 
-  renderStopList();
   renderMarkers();
   updateFilters();
 
