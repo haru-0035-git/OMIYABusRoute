@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap");
 
 :root {
   color-scheme: light;
@@ -10,8 +10,8 @@
   --accent-muted: rgba(13, 110, 253, 0.12);
   --text-color: #1b2538;
   --subtle-text: #445268;
-  font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    sans-serif;
+  font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
 * {
@@ -30,7 +30,7 @@ body {
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background: var(--bg-gradient);
@@ -39,7 +39,7 @@ body::before {
 
 .app-header {
   padding: 1.5rem clamp(1rem, 3vw, 3rem);
-  background: rgba(13, 110, 253, 0.07);
+  background: #000000;
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--panel-border);
 }
@@ -79,7 +79,7 @@ body::before {
 }
 
 .info-panel {
-  background: var(--panel-bg);
+  background: #000000;
   border-radius: 1rem;
   padding: 1rem 1.25rem 1.5rem;
   border: 1px solid var(--panel-border);
@@ -121,7 +121,7 @@ body::before {
   padding: 0.7rem 0.85rem;
   border-radius: 0.75rem;
   border: 1px solid var(--panel-border);
-  background: rgba(255, 255, 255, 0.95);
+  background: #000000;
   color: inherit;
   font: inherit;
   cursor: pointer;
@@ -136,14 +136,14 @@ body::before {
 
 .stop-selector option {
   color: var(--text-color);
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 .stop-details {
   border: 1px solid var(--panel-border);
   border-radius: 0.75rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.92);
+  background: #000000;
   min-height: 220px;
 }
 
