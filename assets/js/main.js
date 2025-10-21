@@ -1,4 +1,4 @@
-(function () {
+document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map', {
     center: [35.907, 139.6239],
     zoom: 16,
@@ -29,6 +29,7 @@
   const eastContainer = document.getElementById('east-stops');
   const westContainer = document.getElementById('west-stops');
   const detailsElement = document.getElementById('stop-details');
+  const mapContainer = document.querySelector('.map-container');
 
   let activeStopId = null;
 
@@ -297,4 +298,19 @@
     if (!stop) return;
     renderStopDetails(stop);
   }, 60000);
-})();
+
+  map.whenReady(() => {
+    map.invalidateSize();
+  });
+
+  window.addEventListener('resize', () => {
+    map.invalidateSize();
+  });
+
+  if (mapContainer && 'ResizeObserver' in window) {
+    const observer = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+    observer.observe(mapContainer);
+  }
+});
